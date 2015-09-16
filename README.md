@@ -2,9 +2,9 @@
 
 This is a program designed to generate all comic book layouts possible given a few assumptions:
 
-	* All panels are rectangular
-	* All panels can only have corners in predefined grid positions
-	* All available space on the page must be filled
+- All panels are rectangular
+- All panels can only have corners in predefined grid positions
+- All available space on the page must be filled
 
 I spend a lot of time thinking about how to do this, and I what I came up with is just brute force guessing. I was hoping to find how to predict the number of possible layouts given a known grid, but I haven't found the right way to express it. I even asked a mathemetician. So instead of running until that formula is satisfied, this script just runs forever. I just kill it whenever it seems like there aren't any more layouts for the current settings.
 
