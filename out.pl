@@ -48,7 +48,7 @@ while (1){
 	my %layout; # a hash
 	my $layoutstring = ''; #a string
 	
-	# LOOK is a label, which lets me reset back to this point as overlaps are discovered
+	# LOOK is a label, which lets me jump back to this point early if overlaps are discovered
 	LOOK: while (length($allpoints) > 0){
 
 		# pick a letter from that $allpoints string
@@ -56,7 +56,7 @@ while (1){
 		# ... and figure out it's position as x,y coordinates
 		my ($px,$py) = (index($rows,$point) % $maxRow, index($columns,$point) % $maxCol);
 	
-		# pick another, later letter from $allpoints
+		# pick another letter from $allpoints
 		my $target = substr($allpoints,int(rand(length $allpoints)),1);
 		# ... and figure out it's position as x,y coordinates 
 		my ($tx,$ty) =  (index($rows,$target) % $maxRow, index($columns,$target) % $maxCol);
@@ -65,19 +65,20 @@ while (1){
 		# can we draw a valid rectangle with these two points?
 		# "valid" means that every point between the two actually exists in $allpoints 
 
-		# how wide?
+		# sort them so we know which comes first
 		my @xrange = sort($tx,$px);
-		# how tall?
 		my @yrange = sort($ty,$py);
 
+		# how far apart are these two points?
 		my $width = abs($tx - $px);
 		my $height = abs($ty - $py);
 
+		# figure out where the top-left corner is
 		my ($tlX, $brX) = sort($tx,$px);
 		my ($tlY, $brY) = sort($ty,$py);
-
 		my $tlLetter = substr($rows,$tlY * $maxRow + $tlX,1);
 
+		# Now, describe this rectangle as a rectangle, according to my notation schema
 		my $rectString = $tlLetter . ($width + 1) . ":" . ($height + 1) . ";";
 
 		my $remove = '';
