@@ -5,10 +5,12 @@
 #  just change the $maxRows,$maxCols, $allpoints, $columns, and $rows accordingly.
 #  More information at http://www.zachwhalen.net/posts/introducing-an-arthrogram/ ‎
 #  
+#  This program is (c) 2015 Zach Whalen, but it's released under a CC BY 4.0 license.
+#  https://creativecommons.org/licenses/by/4.0/
 
 
-#use experimental 'smartmatch';
-no if $] >= 5.017011, warnings => 'experimental::smartmatch';
+# use experimental 'smart match'. This makes something easier later on.
+no if $] >= 5.017011, warnings => 'experimental::smartmatch'; # I don't actually understand this line. I found it on Stack Overflow
 
 # This is going to make layouts that follow a 3 by 3 grid like
 # ...
