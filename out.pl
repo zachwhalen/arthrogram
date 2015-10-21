@@ -63,7 +63,7 @@ while (1){
 	
 
 		# can we draw a valid rectangle with these two points?
-		# valid means that every point between actually exists
+		# "valid" means that every point between the two actually exists in $allpoints 
 
 		my @xrange = sort($tx,$px);
 		my @yrange = sort($ty,$py);
