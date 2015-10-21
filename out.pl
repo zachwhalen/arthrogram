@@ -78,35 +78,34 @@ while (1){
 		my ($tlY, $brY) = sort($ty,$py);
 		my $tlLetter = substr($rows,$tlY * $maxRow + $tlX,1);
 
-		# Now, describe this rectangle as a rectangle, according to my notation schema
+		# Now, describe this rectangle as a panel, according to my notation schema
 		my $rectString = $tlLetter . ($width + 1) . ":" . ($height + 1) . ";";
 
 		my $remove = '';
 
+		# work up and down each row and column
 		for ($w = 0; $w < $maxRow;$w++){
 			for ($h = 0; $h < $maxCol; $h++){
-
+	
 				# is this between my two points?
-			    # and is this letter still available?
-
-			    my $thisletter = substr($rows,$h * $maxRow + $w,1);
-
-			    if ($w ~~ [$xrange[0]..$xrange[1]] && $h ~~ [$yrange[0]..$yrange[1]]){
-
-			    	if (index($allpoints,$thisletter) == -1){
-							# print "Overlap detected. Trying again....\n";
-							next LOOK;
-							}else{
-
-							#continue
-							# print "$thisletter is a match.\n";
-							#remove it
-							$remove .= $thisletter;
-						}
+				# and is this letter still available?
+	
+				my $thisletter = substr($rows,$h * $maxRow + $w,1);
+				
+				# if x position and y position are within the rectangle ...
+				if ($w ~~ [$xrange[0]..$xrange[1]] && $h ~~ [$yrange[0]..$yrange[1]]){
+					
+					# ... and if it hasn't already been removed as part of some other panel
+					if (index($allpoints,$thisletter) == -1){
+						# overlap detected. Try another panel
+						next LOOK;
+					}else{
+						# slate it for removal
+						$remove .= $thisletter;
 					}
-
 				}
 			}
+		}
 
 			foreach (split//,$remove){
 
