@@ -44,18 +44,21 @@ while (1){
 	my $columns = 'ADGBEHCFI';
 	my $rows = 'ABCDEFGHI'; # yes is the same as $allpoints, I don't remember why
 	
-	# start 
-
-	my %layout;
-	my $layoutstring = '';
+	# start building a potential layout
+	my %layout; # a hash
+	my $layoutstring = ''; #a string
+	
+	# LOOK is a label, which lets me reset back to this point as overlaps are discovered
 	LOOK: while (length($allpoints) > 0){
 
-
+		# pick a letter from that $allpoints string
 		my $point = substr($allpoints,int(rand(length $allpoints)),1);
+		# ... and figure out it's position as x,y coordinates
 		my ($px,$py) = (index($rows,$point) % $maxRow, index($columns,$point) % $maxCol);
 	
-
+		# pick another, later letter from $allpoints
 		my $target = substr($allpoints,int(rand(length $allpoints)),1);
+		# ... and figure out it's position as x,y coordinates 
 		my ($tx,$ty) =  (index($rows,$target) % $maxRow, index($columns,$target) % $maxCol);
 	
 
