@@ -5,28 +5,25 @@
 #use experimental 'smartmatch';
 no if $] >= 5.017011, warnings => 'experimental::smartmatch';
 
-#	A 3 by 3 grid like
-#	...
-#	...
-#	...
+# This is going to make layouts that follow a 3 by 3 grid like
+# ...
+# ...
+# ...
 
+# So each grid position gets named like
+# ABC
+# DEF
+# GHI
 
-# So
-
-#   ABC
-#	DEF
-#	GHI
-
-# Or
-
+# Define it like
 $maxRow = 3;
 $maxCol = 3;
 
 # Create the file
 system ("touch arthrogram.txt");
 
-# run forever
-# (have to kill it when it stops reporting new layouts)
+# this while (1) makes it run forever
+# (watch its output and kill it when it hasn't a new layout for a while)
 while (1){
 
 	open READ, "arthrogram.txt" or die "couldn't find it";
