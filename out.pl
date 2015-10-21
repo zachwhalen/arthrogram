@@ -19,33 +19,30 @@ no if $] >= 5.017011, warnings => 'experimental::smartmatch';
 $maxRow = 3;
 $maxCol = 3;
 
-# Create the file
+# Make sure there's a file for writing layouts to
 system ("touch arthrogram.txt");
 
 # this while (1) makes it run forever
 # (watch its output and kill it when it hasn't a new layout for a while)
 while (1){
-
+	
+	# load all the layouts we've already found so we not re-finding them
 	open READ, "arthrogram.txt" or die "couldn't find it";
-
 	@already = <READ>;
-
 	close READ;
-
-	%have = {};
-
+	my %have = {};
 	foreach (@already){
 		chomp;
 		$have{$_} = 'got';
 	}
 
+	# each of those letter-named grid positions is a string
 	my $allpoints = 'ABCDEFGHI';
 
-	# two directions
-
-	my $rows = 'ABCDEFGHI';
+	# it has to be rotated too
+	
 	my $columns = 'ADGBEHCFI';
-
+	my $rows = 'ABCDEFGHI'; # yes is the same as $allpoints, I don't remember why
 	
 	# start 
 
