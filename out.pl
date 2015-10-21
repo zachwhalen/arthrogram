@@ -65,7 +65,9 @@ while (1){
 		# can we draw a valid rectangle with these two points?
 		# "valid" means that every point between the two actually exists in $allpoints 
 
+		# how wide?
 		my @xrange = sort($tx,$px);
+		# how tall?
 		my @yrange = sort($ty,$py);
 
 		my $width = abs($tx - $px);
