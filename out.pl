@@ -1,6 +1,11 @@
 #!/usr/bin/local/perl
 
-# See: https://github.com/zachwhalen/arthrogram
+#  This is the commented version of the script I used to generate "An Arthrogram", which creates potential panel layouts in a 3x3 grid.
+#  With modification, this script can easeily create other grid-based layouts; 
+#  just change the $maxRows,$maxCols, $allpoints, $columns, and $rows accordingly.
+#  More information at http://www.zachwhalen.net/posts/introducing-an-arthrogram/ ‎
+#  
+
 
 #use experimental 'smartmatch';
 no if $] >= 5.017011, warnings => 'experimental::smartmatch';
@@ -107,29 +112,33 @@ while (1){
 			}
 		}
 
-			foreach (split//,$remove){
-
-				substr($allpoints,index($allpoints,$_),1,"");
-			}
-	
+		# success continues! Remove all of those points slated for removal
+		foreach (split//,$remove){
+			substr($allpoints,index($allpoints,$_),1,"");
+		}
+		# add this panel to our layout
 		$layout{$tlLetter} = ($width + 1) . ":" . ($height + 1);
 	
 	}
 
+	# ceate the panel layout string for saving it
 	foreach (sort keys %layout){
 		$layoutstring .= "$_$layout{$_}";
 	}
 
 	
-
+	# check to see if we already have this layout
 	if ($have{$layoutstring} eq 'got'){
 		#print "Already found this one, moving on...\n";
 	}else{
+		# report success
 		print "Generated layout: $layoutstring\n";
-		open WRITE, ">>arthrogram.txt" or die "wat";
+		# save it to the file
+		open WRITE, ">>arthrogram.txt" or die "Ehhh, something happened";
 		print WRITE $layoutstring . "\n";
 	}
 	close WRITE;
+	# ... and look for the next one
 }
 
 exit;
